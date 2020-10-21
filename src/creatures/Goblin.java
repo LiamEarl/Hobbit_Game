@@ -1,11 +1,11 @@
-package objects;
+package creatures;
 
 import math.VectorF2D;
 
-public class Dwarf extends Entity {
+public class Goblin extends Entity {
     private VectorF2D position;
 
-    public Dwarf(VectorF2D position) {
+    public Goblin(VectorF2D position) {
         this.position = position;
     }
 

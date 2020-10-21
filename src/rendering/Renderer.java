@@ -1,10 +1,29 @@
 package rendering;
 
-import objects.Dwarf;
+import creatures.*;
+import processing.core.PApplet;
 
 public class Renderer {
 
-    void renderDwarf(Dwarf dwarfToRender) {
+    private final processing.core.PApplet PApplet;
+
+    public Renderer(PApplet pApplet) {
+        this.PApplet = pApplet;
+    }
+
+    public void renderDwarf(Dwarf toRender) {
+
+    }
+    public void renderHobbit(Hobbit toRender) {
+
+    }
+    public void renderGoblin(Goblin toRender) {
+
+    }
+    public void renderSpider(Spider toRender) {
+
+    }
+    public void renderHuman(Human toRender) {
 
     }
 
