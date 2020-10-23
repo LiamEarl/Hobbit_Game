@@ -1,4 +1,4 @@
-package main;
+package game;
 
 import processing.core.PApplet;
 import processing.event.MouseEvent;
@@ -27,11 +27,9 @@ public class Main extends PApplet {
     }
 
     public void draw() {
-        background(abs(sin(frameCount/30)*255), abs(-sin(frameCount/15)*255), abs(sin(frameCount/60)*255));
+        noStroke();
+        background(255);
 
-        textSize(width/10);
-        fill(0);
-        text("this is a test", width/2, height/2);
     }
 
 
