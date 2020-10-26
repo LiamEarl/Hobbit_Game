@@ -2,6 +2,7 @@ package game;
 
 import processing.core.PApplet;
 import processing.event.MouseEvent;
+import rendering.Renderer;
 
 
 public class Main extends PApplet {
@@ -9,6 +10,11 @@ public class Main extends PApplet {
 
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
+
+    private Renderer renderer = new Renderer(this); // Renderer instance to display the game
+
+    private Game game = new Game(renderer); // Game instance
+
 
     public Main() {
 
@@ -24,12 +30,13 @@ public class Main extends PApplet {
         SCREEN_HEIGHT = height;
 
         textAlign(CENTER, CENTER);
+        noStroke();
     }
 
     public void draw() {
-        noStroke();
-        background(255);
 
+        background(255);
+        renderer.renderScene(game);
     }
 
 
