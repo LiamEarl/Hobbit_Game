@@ -11,9 +11,9 @@ public class Main extends PApplet {
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
 
-    private Renderer renderer = new Renderer(this); // Renderer instance to display the game
+    public Renderer renderer = new Renderer(this); // Renderer instance to display the game
 
-    private Game game = new Game(renderer); // Game instance
+    public Game game = new Game(renderer); // Game instance
 
     public boolean keys[];
 
@@ -41,7 +41,6 @@ public class Main extends PApplet {
         background(255);
         renderer.renderScene(game);
     }
-
 
     @Override
     public void mouseWheel(MouseEvent event) {}

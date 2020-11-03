@@ -1,6 +1,7 @@
 package game;
 
 import blocks.Block;
+import control.EntityController;
 import creatures.*;
 import math.VectorF2D;
 import rendering.Renderer;
@@ -49,12 +50,17 @@ public class Game {
         };
 
         scenarios.add(new Scenario(createLevelData(scenario1)));
-
         this.currentScenario = 0;
 
         test();
     }
 
+    public void tick() {
+        for(int i = 0; i < dwarves.size(); i++) {
+            EntityController controller = new EntityController(dwarves.get(i), false, this);
+            controller.controlEntity();
+        }
+    }
 
     public void test() {
         dwarves.add(new Dwarf(new VectorF2D(500, 500), 245));

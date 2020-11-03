@@ -101,7 +101,7 @@ public class Renderer {
                     float leafY = y + getRandomNumber(GRID_SIZE/15, GRID_SIZE - (GRID_SIZE / 15), seed / 4);
 
                     this.PApplet.fill(36, 72, 0);
-                    this.PApplet.ellipse(leafX, leafY, GRID_SIZE/15, GRID_SIZE/15);
+                    this.PApplet.ellipse(leafX, leafY, GRID_SIZE / 15f, GRID_SIZE / 15f);
                 }
                 break;
 
@@ -161,16 +161,16 @@ public class Renderer {
         this.PApplet.rectMode(this.PApplet.CENTER);
 
         this.PApplet.fill(161, 61, 45);
-        this.PApplet.rect((GRID_SIZE / 2), (GRID_SIZE / 2), GRID_SIZE * 0.75f, GRID_SIZE * 0.35f, GRID_SIZE / 10f);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE / 2f), GRID_SIZE * 0.75f, GRID_SIZE * 0.35f, GRID_SIZE / 10f);
 
         this.PApplet.fill(171, 71, 55);
-        this.PApplet.rect((GRID_SIZE / 2), (GRID_SIZE * 0.5f), GRID_SIZE * 0.45f, GRID_SIZE * 0.42f, GRID_SIZE / 10f);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE * 0.5f), GRID_SIZE * 0.45f, GRID_SIZE * 0.42f, GRID_SIZE / 10f);
 
         this.PApplet.fill(203, 132, 66);
-        this.PApplet.rect((GRID_SIZE / 2), (GRID_SIZE * 0.525f), GRID_SIZE * 0.05f, GRID_SIZE * 0.35f, GRID_SIZE / 20f);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE * 0.525f), GRID_SIZE * 0.05f, GRID_SIZE * 0.35f, GRID_SIZE / 20f);
 
         this.PApplet.fill(101, 67, 33);
-        this.PApplet.rect((GRID_SIZE / 2), (GRID_SIZE / 2), GRID_SIZE * 0.3f, GRID_SIZE * 0.3f, GRID_SIZE / 20f);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE / 2f), GRID_SIZE * 0.3f, GRID_SIZE * 0.3f, GRID_SIZE / 20f);
 
         this.PApplet.rectMode(this.PApplet.CORNER);
         this.PApplet.popMatrix();
@@ -211,6 +211,7 @@ public class Renderer {
 
         this.PApplet.stroke(35, 35, 45);
         this.PApplet.strokeWeight(GRID_SIZE / 20f);
+
         if(toRender.isMoving()) {
             float changeValue1 = processing.core.PApplet.sin(this.PApplet.frameCount / 4f) * (GRID_SIZE / 8f);
             float changeValue2 = processing.core.PApplet.sin((this.PApplet.frameCount + 5) / 4f) * (GRID_SIZE / 8f);
@@ -299,6 +300,5 @@ public class Renderer {
         random.setSeed(seed);
         return random.nextInt(max - min) + min;
     }
-
 
 }

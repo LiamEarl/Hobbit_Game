@@ -14,7 +14,7 @@ public class Spider extends Entity {
     public Spider(VectorF2D position, int direction) { // Constructor
         this.position = position;
         this.direction = direction;
-        this.moving = false;
+        this.moving = true;
         this.target = null;
     }
 
