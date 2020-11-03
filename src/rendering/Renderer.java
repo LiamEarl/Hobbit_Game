@@ -13,13 +13,15 @@ import java.util.Random;
 
 public class Renderer {
 
-    public static final int GRID_SIZE = 40;
+
 
     private final processing.core.PApplet PApplet;
 
+    public static int GRID_SIZE;
+
     public Renderer(PApplet pApplet) {
         this.PApplet = pApplet;
-
+        GRID_SIZE = (int) ((PApplet.width + PApplet.height) / 3f);
     }
 
     public void renderScene(Game game) {
@@ -96,7 +98,7 @@ public class Renderer {
                     long seed = (long)((x + y % 7) * x + (y * 2) + (leaf * 45));
 
                     float leafX = x + getRandomNumber(GRID_SIZE/15, GRID_SIZE - (GRID_SIZE / 15), seed);
-                    float leafY = y + getRandomNumber(GRID_SIZE/15, GRID_SIZE - (GRID_SIZE / 15), seed);
+                    float leafY = y + getRandomNumber(GRID_SIZE/15, GRID_SIZE - (GRID_SIZE / 15), seed / 4);
 
                     this.PApplet.fill(36, 72, 0);
                     this.PApplet.ellipse(leafX, leafY, GRID_SIZE/15, GRID_SIZE/15);
@@ -115,8 +117,9 @@ public class Renderer {
 
             case "leaves":
                 this.PApplet.rectMode(this.PApplet.CENTER);
-                this.PApplet.fill(112, 141, 19, 100);
-                this.PApplet.rect(x + GRID_SIZE / 2f, y + GRID_SIZE / 2f, GRID_SIZE * 5, GRID_SIZE * 5, GRID_SIZE);
+                this.PApplet.fill(82, 111, 0, 100f);
+                this.PApplet.ellipse(x + GRID_SIZE / 2f, y + GRID_SIZE / 2f, GRID_SIZE * 5f, GRID_SIZE * 5f);
+                this.PApplet.rect(x + GRID_SIZE / 2f, y + GRID_SIZE / 2f, GRID_SIZE * 4.5f, GRID_SIZE * 4.5f, GRID_SIZE);
                 this.PApplet.rectMode(this.PApplet.CORNER);
                 break;
         }
@@ -128,41 +131,162 @@ public class Renderer {
         float x = toRender.getPosition().getX();
         float y = toRender.getPosition().getY();
 
-        //this.PApplet.fill(0);
-        //this.PApplet.rect(x, y, GRID_SIZE, GRID_SIZE);
-
+        this.PApplet.pushMatrix();
+        this.PApplet.translate(x, y);
+        this.PApplet.rotate(toRender.getDirection());
+        this.PApplet.rectMode(this.PApplet.CENTER);
         this.PApplet.fill(81, 47, 13);
-        this.PApplet.rect(x, y + (GRID_SIZE * 0.209f), GRID_SIZE, GRID_SIZE * 0.5f, GRID_SIZE / 15f);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE / 2f), GRID_SIZE * 0.9f, GRID_SIZE * 0.4f, GRID_SIZE / 15f);
 
         this.PApplet.fill(101, 67, 33);
-        this.PApplet.rect(x + (GRID_SIZE * 0.125f), y + GRID_SIZE * 0.175f, GRID_SIZE * 0.75f, GRID_SIZE * 0.65f, GRID_SIZE / 5f);
-
-        this.PApplet.rectMode(this.PApplet.CENTER);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE / 2f), GRID_SIZE * 0.65f, GRID_SIZE * 0.55f, GRID_SIZE / 5f);
 
         this.PApplet.fill(200, 200, 200);
-        this.PApplet.rect(x + GRID_SIZE / 2f , y + GRID_SIZE / 2f, GRID_SIZE * 0.45f, GRID_SIZE * 0.55f, GRID_SIZE / 7f);
-
-        this.PApplet.rectMode(this.PApplet.CORNER);
+        this.PApplet.rect(GRID_SIZE / 2f, GRID_SIZE / 2f, GRID_SIZE * 0.35f, GRID_SIZE * 0.45f, GRID_SIZE / 7f);
 
         this.PApplet.fill(203, 132, 66);
-        this.PApplet.rect(x + (GRID_SIZE * 0.315f), y + GRID_SIZE * 0.25f, GRID_SIZE * 0.37f, GRID_SIZE * 0.37f, GRID_SIZE / 7f);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE * 0.45f), GRID_SIZE * 0.32f, GRID_SIZE * 0.32f, GRID_SIZE / 7f);
+
+        this.PApplet.rectMode(this.PApplet.CORNER);
+        this.PApplet.popMatrix();
     }
 
     public void renderHobbit(Hobbit toRender) {
-        this.PApplet.fill(255, 0, 0);
-        this.PApplet.rect(toRender.getPosition().getX(), toRender.getPosition().getX(), GRID_SIZE, GRID_SIZE);
+        float x = toRender.getPosition().getX();
+        float y = toRender.getPosition().getY();
+
+        this.PApplet.pushMatrix();
+        this.PApplet.translate(x, y);
+        this.PApplet.rotate(toRender.getDirection());
+        this.PApplet.rectMode(this.PApplet.CENTER);
+
+        this.PApplet.fill(161, 61, 45);
+        this.PApplet.rect((GRID_SIZE / 2), (GRID_SIZE / 2), GRID_SIZE * 0.75f, GRID_SIZE * 0.35f, GRID_SIZE / 10f);
+
+        this.PApplet.fill(171, 71, 55);
+        this.PApplet.rect((GRID_SIZE / 2), (GRID_SIZE * 0.5f), GRID_SIZE * 0.45f, GRID_SIZE * 0.42f, GRID_SIZE / 10f);
+
+        this.PApplet.fill(203, 132, 66);
+        this.PApplet.rect((GRID_SIZE / 2), (GRID_SIZE * 0.525f), GRID_SIZE * 0.05f, GRID_SIZE * 0.35f, GRID_SIZE / 20f);
+
+        this.PApplet.fill(101, 67, 33);
+        this.PApplet.rect((GRID_SIZE / 2), (GRID_SIZE / 2), GRID_SIZE * 0.3f, GRID_SIZE * 0.3f, GRID_SIZE / 20f);
+
+        this.PApplet.rectMode(this.PApplet.CORNER);
+        this.PApplet.popMatrix();
     }
     public void renderGoblin(Goblin toRender) {
-        this.PApplet.fill(0, 150, 20);
-        this.PApplet.rect(toRender.getPosition().getX(), toRender.getPosition().getX(), GRID_SIZE, GRID_SIZE);
+        float x = toRender.getPosition().getX();
+        float y = toRender.getPosition().getY();
+
+        this.PApplet.pushMatrix();
+        this.PApplet.translate(x, y);
+        this.PApplet.rotate(toRender.getDirection());
+
+        this.PApplet.rectMode(this.PApplet.CENTER);
+
+        this.PApplet.fill(80, 90, 95);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE / 2f), GRID_SIZE * 0.75f, GRID_SIZE * 0.35f, GRID_SIZE / 10f);
+
+        this.PApplet.fill(90, 100, 105);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE * 0.5f), GRID_SIZE * 0.45f, GRID_SIZE * 0.42f, GRID_SIZE / 10f);
+
+        this.PApplet.fill(35, 116, 45);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE * 0.45f), GRID_SIZE * 0.5f, GRID_SIZE * 0.15f, GRID_SIZE / 20f);
+        this.PApplet.fill(25, 106, 35);
+        this.PApplet.rect((GRID_SIZE / 2f), (GRID_SIZE * 0.525f), GRID_SIZE * 0.05f, GRID_SIZE * 0.35f, GRID_SIZE / 20f);
+        this.PApplet.rect(GRID_SIZE / 2f, (GRID_SIZE / 2f), GRID_SIZE * 0.3f, GRID_SIZE * 0.3f, GRID_SIZE / 20f);
+
+        this.PApplet.rectMode(this.PApplet.CORNER);
+        this.PApplet.popMatrix();
     }
+
     public void renderSpider(Spider toRender) {
-        this.PApplet.fill(25, 25, 55);
-        this.PApplet.rect(toRender.getPosition().getX(), toRender.getPosition().getX(), GRID_SIZE, GRID_SIZE);
+        float x = toRender.getPosition().getX();
+        float y = toRender.getPosition().getY();
+
+        this.PApplet.pushMatrix();
+        this.PApplet.translate(x, y);
+        this.PApplet.rotate(toRender.getDirection());
+
+        this.PApplet.stroke(35, 35, 45);
+        this.PApplet.strokeWeight(GRID_SIZE / 20f);
+        if(toRender.isMoving()) {
+            float changeValue1 = processing.core.PApplet.sin(this.PApplet.frameCount / 4f) * (GRID_SIZE / 8f);
+            float changeValue2 = processing.core.PApplet.sin((this.PApplet.frameCount + 5) / 4f) * (GRID_SIZE / 8f);
+            float changeValue3 = processing.core.PApplet.sin((this.PApplet.frameCount + 10) / 4f) * (GRID_SIZE / 8f);
+
+
+            this.PApplet.line(GRID_SIZE / 8f, GRID_SIZE / 3f - changeValue2, 0, GRID_SIZE / 10f - changeValue2);
+            this.PApplet.line(GRID_SIZE / 8f, GRID_SIZE / 3f - changeValue2, GRID_SIZE / 2.5f, GRID_SIZE / 2f);
+
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 8f), GRID_SIZE / 3f + changeValue2, GRID_SIZE, GRID_SIZE / 10f + changeValue2);
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 8f), GRID_SIZE / 3f + changeValue2, GRID_SIZE - (GRID_SIZE / 2.5f), GRID_SIZE / 2f);
+
+            this.PApplet.line(GRID_SIZE / 5f, GRID_SIZE / 4f - changeValue3, GRID_SIZE / 4f, -changeValue3);
+            this.PApplet.line(GRID_SIZE / 5f, GRID_SIZE / 4f - changeValue3, GRID_SIZE / 2.5f, GRID_SIZE / 2f);
+
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 5f), GRID_SIZE / 4f + changeValue2, GRID_SIZE - (GRID_SIZE / 4f), changeValue2);
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 5f), GRID_SIZE / 4f + changeValue2, GRID_SIZE - (GRID_SIZE / 2.5f), GRID_SIZE / 2f);
+
+
+            this.PApplet.line(GRID_SIZE / 8f, GRID_SIZE - (GRID_SIZE / 3f) + changeValue1, 0, GRID_SIZE - (GRID_SIZE / 10f) + changeValue1);
+            this.PApplet.line(GRID_SIZE / 8f, GRID_SIZE - (GRID_SIZE / 3f) + changeValue1, GRID_SIZE / 2.5f, GRID_SIZE - (GRID_SIZE / 2f));
+
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 8f), GRID_SIZE - (GRID_SIZE / 3f) - changeValue1, GRID_SIZE, GRID_SIZE - (GRID_SIZE / 10f) - changeValue1);
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 8f), GRID_SIZE - (GRID_SIZE / 3f) - changeValue1, GRID_SIZE - (GRID_SIZE / 2.5f), GRID_SIZE - (GRID_SIZE / 2f));
+
+            this.PApplet.line(GRID_SIZE / 5f, GRID_SIZE - (GRID_SIZE / 4f) + (changeValue1 / 2f), GRID_SIZE / 4f, GRID_SIZE + (changeValue1 / 2f));
+            this.PApplet.line(GRID_SIZE / 5f, GRID_SIZE - (GRID_SIZE / 4f) + (changeValue1 / 2f), GRID_SIZE / 2.5f, GRID_SIZE - (GRID_SIZE / 2f));
+
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 5f), GRID_SIZE - (GRID_SIZE / 4f) - (changeValue1 / 2f), GRID_SIZE - (GRID_SIZE / 4f), GRID_SIZE - (changeValue1 / 2f));
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 5f), GRID_SIZE - (GRID_SIZE / 4f) - (changeValue1 / 2f), GRID_SIZE - (GRID_SIZE / 2.5f), GRID_SIZE - (GRID_SIZE / 2f));
+
+        } else {
+            this.PApplet.line(GRID_SIZE / 8f, GRID_SIZE / 3f, 0, GRID_SIZE / 10f);
+            this.PApplet.line(GRID_SIZE / 8f, GRID_SIZE / 3f, GRID_SIZE / 2.5f, GRID_SIZE / 2f);
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 8f), GRID_SIZE / 3f, GRID_SIZE, GRID_SIZE / 10f);
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 8f), GRID_SIZE / 3f, GRID_SIZE - (GRID_SIZE / 2.5f), GRID_SIZE / 2f);
+
+            this.PApplet.line(GRID_SIZE / 5f, GRID_SIZE / 4f, GRID_SIZE / 4f, 0);
+            this.PApplet.line(GRID_SIZE / 5f, GRID_SIZE / 4f, GRID_SIZE / 2.5f, GRID_SIZE / 2f);
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 5f), GRID_SIZE / 4f, GRID_SIZE - (GRID_SIZE / 4f), 0);
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 5f), GRID_SIZE / 4f, GRID_SIZE - (GRID_SIZE / 2.5f), GRID_SIZE / 2f);
+
+
+            this.PApplet.line(GRID_SIZE / 8f, GRID_SIZE - (GRID_SIZE / 3f), 0, GRID_SIZE - (GRID_SIZE / 10f));
+            this.PApplet.line(GRID_SIZE / 8f, GRID_SIZE - (GRID_SIZE / 3f), GRID_SIZE / 2.5f, GRID_SIZE - (GRID_SIZE / 2f));
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 8f), GRID_SIZE - (GRID_SIZE / 3f), GRID_SIZE, GRID_SIZE - (GRID_SIZE / 10f));
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 8f), GRID_SIZE - (GRID_SIZE / 3f), GRID_SIZE - (GRID_SIZE / 2.5f), GRID_SIZE - (GRID_SIZE / 2f));
+
+            this.PApplet.line(GRID_SIZE / 5f, GRID_SIZE - (GRID_SIZE / 4f), GRID_SIZE / 4f, GRID_SIZE);
+            this.PApplet.line(GRID_SIZE / 5f, GRID_SIZE - (GRID_SIZE / 4f), GRID_SIZE / 2.5f, GRID_SIZE - (GRID_SIZE / 2f));
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 5f), GRID_SIZE - (GRID_SIZE / 4f), GRID_SIZE - (GRID_SIZE / 4f), GRID_SIZE);
+            this.PApplet.line(GRID_SIZE - (GRID_SIZE / 5f), GRID_SIZE - (GRID_SIZE / 4f), GRID_SIZE - (GRID_SIZE / 2.5f), GRID_SIZE - (GRID_SIZE / 2f));
+        }
+
+        this.PApplet.noStroke();
+
+        this.PApplet.rectMode(this.PApplet.CENTER);
+
+        this.PApplet.fill(35, 35, 25);
+        this.PApplet.rect(GRID_SIZE / 2f, GRID_SIZE * 0.3f, GRID_SIZE / 4f, GRID_SIZE / 4f, GRID_SIZE / 15f);
+
+        this.PApplet.fill(45, 45, 35);
+        this.PApplet.rect(GRID_SIZE / 2f, GRID_SIZE * 0.6f, GRID_SIZE / 2.5f, GRID_SIZE / 2.5f, GRID_SIZE / 8f);
+
+        this.PApplet.fill(150, 20, 0);
+        this.PApplet.ellipse(GRID_SIZE * 0.47f, GRID_SIZE * 0.27f, GRID_SIZE / 20f, GRID_SIZE / 20f);
+        this.PApplet.ellipse(GRID_SIZE * 0.53f, GRID_SIZE * 0.27f, GRID_SIZE / 20f, GRID_SIZE / 20f);
+        this.PApplet.ellipse(GRID_SIZE * 0.41f, GRID_SIZE * 0.31f, GRID_SIZE / 20f, GRID_SIZE / 20f);
+        this.PApplet.ellipse(GRID_SIZE * 0.59f, GRID_SIZE * 0.31f, GRID_SIZE / 20f, GRID_SIZE / 20f);
+
+        this.PApplet.rectMode(this.PApplet.CORNER);
+        this.PApplet.popMatrix();
     }
     public void renderHuman(Human toRender) {
         this.PApplet.fill(0, 0, 150);
-        this.PApplet.rect(toRender.getPosition().getX(), toRender.getPosition().getX(), GRID_SIZE, GRID_SIZE);
+        this.PApplet.rect(GRID_SIZE / 2f, GRID_SIZE / 2f, GRID_SIZE, GRID_SIZE);
     }
 
     private boolean inScreen(Entity toAnalyze) {

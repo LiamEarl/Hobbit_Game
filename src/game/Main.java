@@ -15,13 +15,14 @@ public class Main extends PApplet {
 
     private Game game = new Game(renderer); // Game instance
 
+    public boolean keys[];
 
     public Main() {
 
     }
 
     public void settings() {
-        size(1000, 1000, P2D);
+        fullScreen();
 
     }
 
@@ -31,6 +32,8 @@ public class Main extends PApplet {
 
         textAlign(CENTER, CENTER);
         noStroke();
+
+        keys = new boolean[222];
     }
 
     public void draw() {
@@ -44,16 +47,16 @@ public class Main extends PApplet {
     public void mouseWheel(MouseEvent event) {}
 
     @Override
-    public void mousePressed() {mouseDown = true; }
+    public void mousePressed()  {mouseDown = true; }
 
     @Override
     public void mouseReleased() {mouseDown = false; }
 
     @Override
-    public void keyPressed() {}
+    public void keyPressed() {keys[keyCode] = true; }
 
     @Override
-    public void keyReleased() {}
+    public void keyReleased() {keys[keyCode] = false; }
 
     public static void main(String[] args) {
         String[] appletArgs = new String[]{Main.class.getName()};

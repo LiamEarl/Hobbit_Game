@@ -5,8 +5,11 @@ import math.VectorF2D;
 public class Goblin extends Entity {
     private VectorF2D position;
 
-    public Goblin(VectorF2D position) { // Constructor
+    private int direction;
+
+    public Goblin(VectorF2D position, int direction) { // Constructor
         this.position = position;
+        this.direction = direction;
     }
 
     public VectorF2D getPosition() {
@@ -17,6 +20,14 @@ public class Goblin extends Entity {
 
     public void setPosition(float newXPosition, float newYPosition) {  // A different method to set the position of the entity.
         position.setValues(newXPosition, newYPosition);
+    }
+
+    public int getDirection() { // Method to get the direction of the entity
+        return direction;
+    }
+
+    public void setDirection(int direction) { // Method to set the direction of the entity;
+        this.direction = direction;
     }
 }
 
